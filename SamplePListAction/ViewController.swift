@@ -12,26 +12,18 @@ import GameplayKit
 
 class ViewController: NSViewController {
 
-    @IBOutlet var skView: SKView!
-    
+    //    @IBOutlet var skView: SKView!
+    override func loadView() {
+        // viewをSKViewに設定
+        let skView = SKView(frame: (NSScreen.main?.frame)!)
+        self.view = skView
+        
+    }
     override func viewDidLoad() {
-        super.viewDidLoad()
-
-        if let view = self.skView {
-            // Load the SKScene from 'GameScene.sks'
-            if let scene = SKScene(fileNamed: "GameScene") {
-                // Set the scale mode to scale to fit the window
-                scene.scaleMode = .aspectFill
-                
-                // Present the scene
-                view.presentScene(scene)
-            }
-            
-            view.ignoresSiblingOrder = true
-            
-            view.showsFPS = true
-            view.showsNodeCount = true
-        }
+        let scene = GameScene(size:(NSScreen.main?.frame.size)!)
+        scene.scaleMode = .aspectFit
+        let skView = self.view as! SKView
+        skView.presentScene(scene)
     }
 }
 
